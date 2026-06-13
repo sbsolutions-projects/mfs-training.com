@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAP EWM MFS Training | mfs-training.com</title>
+    <meta name="description" content="A hands-on classroom training that prepares in-house teams for SAP EWM MFS (Material Flow System) — built around an emulation of real automated warehouses. By Hendrik Schulte-Bahrenberg.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Hendrik Schulte-Bahrenberg">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mfs-training.com/">
+    <meta property="og:title" content="SAP EWM MFS Training | mfs-training.com">
+    <meta property="og:description" content="Prepare your in-house team for SAP EWM MFS before the project does. Hands-on classroom training with an emulation of real automated warehouses.">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SAP EWM MFS Training">
+    <meta name="twitter:description" content="Hands-on SAP EWM MFS training for in-house project teams, built around a live warehouse emulation.">
+
+    <link rel="canonical" href="https://mfs-training.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS — shared wmexperts house style (.consulting)
+           ============================================================ */
+        :root {
+            --sap-blue: #005597;
+            --sap-blue-light: #0066B3;
+            --sap-blue-deep: #013E6E;
+            --bg-page: #F5F7FA;
+            --bg-light: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --text-dark: #111827;
+            --text-muted: #6B7280;
+            --border: #E5E7EB;
+            --accent: #EEF6FC;
+            --container: 1080px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            background: linear-gradient(180deg,
+                rgba(0, 85, 151, 0.08) 0%,
+                rgba(0, 85, 151, 0.04) 25%,
+                transparent 60%);
+            color: var(--text-muted);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+        a { color: var(--sap-blue); }
+
+        /* ============================================================
+           HEADER / NAV
+           ============================================================ */
+        .site-header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav-wrap {
+            max-width: var(--container); margin: 0 auto; padding: 1.1rem 24px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo { font-weight: 700; font-size: 1.4rem; color: var(--sap-blue); text-decoration: none; letter-spacing: -0.5px; }
+        .logo-secondary { color: var(--text-dark); }
+
+        .main-nav { display: flex; align-items: center; gap: 2rem; }
+        .main-nav a {
+            text-decoration: none; color: var(--text-muted);
+            font-size: 0.95rem; font-weight: 500; transition: color 0.2s;
+        }
+        .main-nav a:hover, .main-nav a.active { color: var(--sap-blue); }
+        .main-nav .btn { margin-left: 0.5rem; }
+
+        .menu-toggle {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: 0; cursor: pointer; padding: 6px;
+        }
+        .menu-toggle span { width: 24px; height: 2px; background: var(--text-dark); transition: 0.25s; border-radius: 2px; }
+        .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ============================================================
+           BUTTONS
+           ============================================================ */
+        .btn {
+            display: inline-block; text-decoration: none; cursor: pointer;
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.95rem;
+            padding: 13px 26px; border-radius: 8px; border: 2px solid transparent;
+            transition: all 0.2s; text-align: center;
+        }
+        .btn-primary {
+            background: var(--sap-blue); color: #fff;
+            box-shadow: 0 4px 12px rgba(0,85,151,0.2);
+        }
+        .btn-primary:hover { background: var(--sap-blue-light); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,85,151,0.3); }
+        .btn-secondary { color: var(--sap-blue); border-color: var(--sap-blue); background: transparent; }
+        .btn-secondary:hover { background: var(--sap-blue); color: #fff; transform: translateY(-2px); }
+        .btn-ghost-light { color: #fff; border-color: rgba(255,255,255,0.5); background: transparent; }
+        .btn-ghost-light:hover { background: #fff; color: var(--sap-blue-deep); border-color: #fff; }
+
+        /* ============================================================
+           SECTION SCAFFOLD
+           ============================================================ */
+        section { padding: 4.5rem 0; }
+        .eyebrow {
+            display: inline-block; text-transform: uppercase; letter-spacing: 1.6px;
+            font-size: 0.76rem; font-weight: 600; color: var(--sap-blue); margin-bottom: 0.9rem;
+        }
+        .section-head { max-width: 720px; margin-bottom: 2.5rem; }
+        .section-head h2 { font-size: 1.95rem; color: var(--text-dark); font-weight: 700; line-height: 1.25; letter-spacing: -0.5px; }
+        .section-head p { margin-top: 0.9rem; font-size: 1.08rem; }
+
+        h4 { color: var(--text-dark); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px; margin: 1.4rem 0 0.7rem; font-weight: 600; }
+
+        ul.clean { list-style: none; }
+        ul.clean li { position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; font-size: 1.02rem; }
+        ul.clean li::before {
+            content: ""; position: absolute; left: 0; top: 0.62em;
+            width: 7px; height: 7px; border-radius: 2px; background: var(--sap-blue);
+        }
+
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero { padding: 5rem 0 4rem; }
+        .hero h1 {
+            font-size: clamp(2.1rem, 5vw, 3.35rem); color: var(--text-dark);
+            font-weight: 700; line-height: 1.12; letter-spacing: -1.5px; max-width: 16ch;
+        }
+        .hero h1 .stall { color: var(--sap-blue); }
+        .hero .sub { font-size: 1.2rem; color: var(--text-muted); max-width: 60ch; margin-top: 1.5rem; line-height: 1.65; }
+        .hero .actions { margin-top: 2.2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        /* ============================================================
+           WHO IT'S FOR
+           ============================================================ */
+        .split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; }
+        .panel {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.8rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .panel h3 { color: var(--text-dark); font-size: 1.15rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+        .panel.muted { background: var(--bg-light); }
+        .timing { margin-top: 1.5rem; padding: 1.1rem 1.3rem; background: var(--accent); border-radius: 10px; font-size: 0.97rem; color: var(--text-dark); }
+        .timing strong { color: var(--sap-blue); }
+
+        /* ============================================================
+           MODULES (the 3 components)
+           ============================================================ */
+        .modules { display: grid; gap: 1.5rem; }
+        .module {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 2rem; display: grid; grid-template-columns: auto 1fr; gap: 1.6rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: border-color 0.2s, transform 0.2s;
+        }
+        .module:hover { border-color: var(--sap-blue); transform: translateY(-3px); }
+        .module .num {
+            font-size: 1.05rem; font-weight: 700; color: var(--sap-blue);
+            width: 46px; height: 46px; border-radius: 10px; background: var(--accent);
+            display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0,85,151,0.15);
+        }
+        .module h3 { color: var(--text-dark); font-size: 1.35rem; font-weight: 700; }
+        .module .lead { margin: 0.5rem 0 0.4rem; font-size: 1.05rem; }
+
+        /* ============================================================
+           SIGNATURE BLOCK — LIVE EMULATION
+           ============================================================ */
+        .emulation {
+            background: var(--sap-blue-deep);
+            background: linear-gradient(160deg, var(--sap-blue-deep) 0%, var(--sap-blue) 100%);
+            color: #fff;
+        }
+        .emulation .eyebrow { color: #9fd0f2; }
+        .emulation h2 { color: #fff; font-size: 2.05rem; font-weight: 700; letter-spacing: -0.5px; line-height: 1.2; max-width: 22ch; }
+        .emulation .sub { color: rgba(255,255,255,0.85); font-size: 1.1rem; margin-top: 1rem; max-width: 62ch; }
+
+        .warehouses { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.6rem; }
+        .wh {
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 14px; padding: 1.6rem; backdrop-filter: blur(2px);
+        }
+        .wh h3 { color: #fff; font-size: 1.2rem; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem; }
+        .wh p { color: rgba(255,255,255,0.8); font-size: 0.97rem; margin-bottom: 1.2rem; }
+        .wh ul.clean li { color: rgba(255,255,255,0.9); }
+        .wh ul.clean li::before { background: #9fd0f2; }
+
+        /* conveyor animation — the one deliberate motion moment */
+        .track {
+            position: relative; height: 40px; border-radius: 8px;
+            background: rgba(0,0,0,0.22); overflow: hidden; margin-bottom: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.10);
+        }
+        .track::before {
+            content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px;
+            transform: translateY(-50%);
+            background: repeating-linear-gradient(90deg, rgba(255,255,255,0.25) 0 10px, transparent 10px 20px);
+        }
+        .unit {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            animation: flow 7s linear infinite;
+        }
+
+        /* PALLETS (left track): wrapped load on a wooden pallet base */
+        .track.pallet .unit { width: 26px; height: 21px; }
+        .track.pallet .unit::before {            /* the load / wrapped goods */
+            content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 12px;
+            border-radius: 2px; background: #bcd9f0; box-shadow: 0 0 0 1px rgba(255,255,255,0.25);
+        }
+        .track.pallet .unit::after {             /* pallet: top deck board + 3 legs with fork pockets */
+            content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 9px;
+            background:
+                linear-gradient(#a9763f, #a9763f) top / 100% 3px no-repeat,
+                linear-gradient(90deg,
+                    #c69a5e 0 5px, transparent 5px 9px,
+                    #c69a5e 9px 17px, transparent 17px 21px,
+                    #c69a5e 21px 26px) bottom / 100% 6px no-repeat;
+        }
+
+        /* CARTONS (right track): tan box with packing-tape seam + flap line */
+        .track.tote .unit {
+            width: 16px; height: 14px; border-radius: 2px; background: #d6b08a;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(255,255,255,0.12);
+        }
+        .track.tote .unit::before {              /* vertical packing tape */
+            content: ""; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+            width: 3px; height: 100%; background: #efe2c4;
+        }
+        .track.tote .unit::after {               /* top flap seam */
+            content: ""; position: absolute; left: 0; top: 4px; width: 100%; height: 1.5px;
+            background: rgba(120,86,48,0.55);
+        }
+        .unit:nth-child(1) { animation-delay: 0s; }
+        .unit:nth-child(2) { animation-delay: -1.7s; }
+        .unit:nth-child(3) { animation-delay: -3.4s; }
+        .unit:nth-child(4) { animation-delay: -5.1s; }
+        @keyframes flow {
+            from { left: -8%; }
+            to   { left: 108%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .unit { animation: none; }
+            .unit:nth-child(1){ left: 8%; } .unit:nth-child(2){ left: 33%; }
+            .unit:nth-child(3){ left: 58%; } .unit:nth-child(4){ left: 83%; }
+        }
+
+        .emulation .note { margin-top: 2rem; font-size: 0.97rem; color: rgba(255,255,255,0.78); max-width: 64ch; }
+
+        /* ============================================================
+           CREDIBILITY
+           ============================================================ */
+        .credibility .panel { display: grid; grid-template-columns: 1fr; gap: 0.4rem; }
+        .credibility p { font-size: 1.08rem; }
+        .credibility p + p { margin-top: 1rem; }
+
+        /* ============================================================
+           TWO PATHS (cross-links)
+           ============================================================ */
+        .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .path-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 1.8rem; text-decoration: none; display: flex; flex-direction: column;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; color: inherit;
+        }
+        .path-card:hover { border-color: var(--sap-blue); transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+        .path-card .tag {
+            align-self: flex-start; background: var(--accent); color: var(--sap-blue);
+            font-size: 0.72rem; font-weight: 600; letter-spacing: 0.4px; padding: 5px 12px;
+            border-radius: 6px; border: 1px solid rgba(0,85,151,0.15); margin-bottom: 1rem;
+        }
+        .path-card h3 { color: var(--text-dark); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .path-card h3 .dot { color: var(--sap-blue); }
+        .path-card .go { margin-top: 1.2rem; color: var(--sap-blue); font-weight: 600; font-size: 0.95rem; }
+
+        /* ============================================================
+           FINAL CTA
+           ============================================================ */
+        .cta-subtle {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+            padding: 2.4rem; display: flex; align-items: center; justify-content: space-between;
+            gap: 2rem; flex-wrap: wrap; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .cta-subtle h3 { color: var(--text-dark); font-size: 1.5rem; font-weight: 700; }
+        .cta-subtle p { margin-top: 0.5rem; max-width: 52ch; }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 3rem 0; margin-top: 1rem; }
+        .footer-inner { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-bottom: 1.4rem; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.92rem; font-weight: 500; }
+        .footer-links a:hover { color: var(--sap-blue); }
+        .footer-meta { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; font-size: 0.88rem; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 1.4rem; }
+        .footer-meta a { color: var(--text-muted); text-decoration: none; }
+        .footer-meta a:hover { color: var(--sap-blue); }
+
+        /* ============================================================
+           COOKIE BANNER
+           ============================================================ */
+        #cookie-banner {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
+            background: var(--bg-card); border-top: 1px solid var(--border);
+            padding: 1.2rem 24px; z-index: 9999; box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+            align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
+        }
+        #cookie-banner.show { display: flex; }
+        #cookie-banner p { font-size: 0.9rem; color: var(--text-dark); margin: 0; }
+        .cookie-actions { display: flex; gap: 0.8rem; }
+        .cookie-actions button { padding: 9px 18px; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; border: 1px solid var(--border); }
+        .cookie-actions .accept { background: var(--sap-blue); color: #fff; border: none; }
+        .cookie-actions .decline { background: transparent; color: var(--text-muted); }
+
+        /* future emulation-as-a-service stub stays hidden */
+        .es-placeholder { display: none !important; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 860px) {
+            .menu-toggle { display: flex; }
+            .main-nav {
+                display: none; position: absolute; top: 100%; left: 0; right: 0;
+                flex-direction: column; align-items: flex-start; gap: 0;
+                background: var(--bg-card); border-bottom: 1px solid var(--border);
+                padding: 0.5rem 24px 1.2rem;
+            }
+            .main-nav.open { display: flex; }
+            .main-nav a { padding: 0.7rem 0; width: 100%; }
+            .main-nav .btn { margin: 0.5rem 0 0; }
+
+            .split, .warehouses, .paths { grid-template-columns: 1fr; }
+            .module { grid-template-columns: 1fr; gap: 1rem; }
+            section { padding: 3.2rem 0; }
+            .hero { padding: 3.5rem 0 2.5rem; }
+            .cta-subtle { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a href="/" class="logo">MFS<span class="logo-secondary">-training.com</span></a>
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menuToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                <a href="#for-whom">Who it's for</a>
+                <a href="#training">The Training</a>
+                <a href="#emulation">Emulation/Visualization</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ===================== HERO ===================== -->
+        <section class="hero">
+            <div class="container">
+                <span class="eyebrow">SAP EWM &middot; Material Flow System Training</span>
+                <h1>MFS projects don't stall on the conveyor. <span class="stall">They stall on the team meeting MFS for the first time</span>.</h1>
+                <p class="sub">A hands-on classroom training that prepares your in-house team for SAP EWM MFS - built around a live emulation of automated warehouses.</p>
+                <div class="actions">
+                    <a href="#contact" class="btn btn-primary">Request the agenda</a>
+                    <a href="#training" class="btn btn-secondary">See what's covered</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== WHO IT'S FOR ===================== -->
+        <section id="for-whom">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Who it's for</span>
+                    <h2>Built for the team that will sit in the MFS project.</h2>
+                </div>
+
+                <div class="split">
+                    <div class="panel">
+                        <h3>This is for you if&hellip;</h3>
+                        <ul class="clean">
+                            <li>Your warehouse connects EWM to physical automation - conveyors, cranes, sorters, shuttles via PLC.</li>
+                            <li>You run an in-house SAP EWM team facing your first - or next - MFS project.</li>
+                            <li>You're a project or IT lead who needs the team ready before kickoff, not learning on the project's clock.</li>
+                            <li>You want to reduce dependency on expensive external resources for the parts your own people can own.</li>
+                            <li>You're a developer or consultant looking to build solid, practical knowledge of EWM MFS.</li>
+                        </ul>
+                    </div>
+                    <div class="panel muted">
+                        <h3>It's not the right fit if&hellip;</h3>
+                        <ul class="clean">
+                            <li>You're after a general EWM introduction. This is MFS-specific, end to end.</li>
+                            <li>There's no automation in scope of your project. Without an MFS layer, most of this won't apply.</li>
+                            <li>You want a certificate rather than project readiness. The goal here is a team that performs in the project - not a badge to hand on the wall.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timing">
+                    <strong>Best timing:</strong> before project start or during the design / blueprint phase - while decisions are still cheap to change, and new knowledge can be applied immediately rather than shelved until later.
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== THE TRAINING (3 MODULES) ===================== -->
+        <section id="training" style="background: var(--bg-light); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">The training</span>
+                    <h2>Three components that build on each other - from the standard, to its extensions up to running a real project.</h2>
+                    <p>Interactive throughout, with the emulation & visualization running alongside most of the sessions to make the concepts stay concrete and practical.</p>
+                </div>
+
+                <div class="modules">
+
+                    <article class="module">
+                        <div class="num">01</div>
+                        <div>
+                            <h3>MFS Basics</h3>
+                            <p class="lead">How SAP EWM actually controls physical automation — the foundation everything else depends on.</p>
+                            <ul class="clean">
+                                <li>MFS architecture and how it communicates with the PLC layer</li>
+                                <li>Important objects - Communication points, resources, queues and many more</li>
+                                <li>Different types of subsystems that MFS can control</li>
+                                <li>Telegrams and the EWM &harr; PLC handshake</li>
+                                <li>Putaway and stock removal strategies</li>
+                                <li>Monitoring material flow in the warehouse management monitor</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="module">
+                        <div class="num">02</div>
+                        <div>
+                            <h3>Enhancing the standard functionality</h3>
+                            <p class="lead">Where the MFS standard ends and your project's real requirements begin - how to extend without painting yourself into a corner.</p>
+                            <ul class="clean">
+                                <li>Recognising the capabilities and the limits of standard MFS before you build around them</li>
+                                <li>Common enhancement points: telegram structures, telegram processing, exception logic and so on</li>
+                                <li>BAdIs and the safe places to extend</li>
+                                <li>When <em>not</em> to enhance - using the standard on purpose</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="module">
+                        <div class="num">03</div>
+                        <div>
+                            <h3>Preparation for MFS projects</h3>
+                            <p class="lead">The project knowledge that rarely makes it into documentation - and that decides whether you go live on time.</p>
+                            <ul class="clean">
+                                <li>Typical MFS project phases, roles, and who owns what</li>
+                                <li>Reading and writing telegram specifications with the equipment suppliers</li>
+                                <li>Testing strategies - usage of emulations before the hardware exists</li>
+                                <li>Go-live and commissioning - what the slides never tell you</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SIGNATURE: LIVE EMULATION ===================== -->
+        <section id="emulation" class="emulation">
+            <div class="container">
+                <span class="eyebrow">What makes this different</span>
+                <h2>You see the warehouse move - not just the customizing screen.</h2>
+                <p class="sub">The training comes with its own MFS emulation and visualization. Two reference warehouses run live in the room: you trigger movements, watch the telegrams flow between EWM and the emulated automation, break things on purpose, and recover them with your own hands.</p>
+
+                <div class="warehouses">
+                    <div class="wh">
+                        <h3>Pallet handling</h3>
+                        <p>A high-bay warehouse with conveyor loops, identification points, and crane control.</p>
+                        <div class="track pallet" aria-hidden="true">
+                            <span class="unit"></span><span class="unit"></span><span class="unit"></span><span class="unit"></span>
+                        </div>
+                        <ul class="clean">
+                            <li>Pallet conveyor and crane movements end to end</li>
+                            <li>Identification points and routing decisions</li>
+                            <li>Exception & reject scenarios</li>
+                            <li>Putaway and removal against the high-bay</li>
+                        </ul>
+                    </div>
+                    <div class="wh">
+                        <h3>Case / tote handling</h3>
+                        <p>A conveyor, sorter logic, work centers and a Miniload.</p>
+                        <div class="track tote" aria-hidden="true">
+                            <span class="unit"></span><span class="unit"></span><span class="unit"></span><span class="unit"></span>
+                        </div>
+                        <ul class="clean">
+                            <li>Tote conveyor and sortation flows</li>
+                            <li>Work center integration and routing</li>
+                            <li>Exception handling on the line</li>
+                            <li>Putaway and removal against the Miniload</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!--
+          ============================================================
+          FUTURE: Emulation-as-a-Service (NOT LIVE YET)
+          Placeholder kept in the background so the page is ready to
+          offer the emulation directly online later. To activate:
+          1. Remove the `hidden` attribute below.
+          2. Remove the `.es-placeholder` class (or its display:none rule).
+          3. Wire the button to the booking/self-service flow.
+          ============================================================
+        -->
+        <section id="emulation-service" class="es-placeholder" hidden aria-hidden="true" data-status="coming-soon">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Coming soon</span>
+                    <h2>Run the emulation yourself, online.</h2>
+                    <p>Access the MFS emulation directly from here — no classroom required.</p>
+                </div>
+                <button class="btn btn-primary" disabled>Notify me</button>
+            </div>
+        </section>
+
+        <!-- ===================== CREDIBILITY ===================== -->
+        <section id="about" class="credibility">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Who's behind it</span>
+                    <h2>Built from real MFS projects - not from academy content.</h2>
+                </div>
+                <div class="panel">
+                    <p>The training is designed and delivered by <strong>Hendrik</strong>, a freelance SAP EWM &amp; MFS consultant with 16+ years of delivery experience on WMS implementation projects - most of them facing EWM and its MFS.</p>
+                    <p>Every component reflects what actually causes MFS rollouts to become expensive or run late - the supplier handshake, solution design, exception handling, go-live realities. Nothing here is theory that hasn't been experienced in the real world.</p>
+                    <p style="margin-top:1.3rem;"><a href="https://wmexperts.consulting/profile.html" target="_blank" rel="noopener" style="font-weight:600;">See the full Consultant Profile &rarr;</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== TWO PATHS ===================== -->
+        <section style="background: var(--bg-light); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Beyond the training</span>
+                    <h2>Two more places to go deeper on SAP EWM (MFS).</h2>
+                </div>
+                <div class="paths">
+                    <a href="https://wmexperts.online" target="_blank" rel="noopener" class="path-card">
+                        <span class="tag">Free knowledge</span>
+                        <h3>WMexperts<span class="dot">.</span>online</h3>
+                        <p>Functional and technical MFS deep-dives, tutorials, and the MFS Map - a reference model for automated warehouses. Useful before, during, and after the training.</p>
+                        <span class="go">Explore the EWM (MFS) content &rarr;</span>
+                    </a>
+                    <a href="https://wmexperts.consulting" target="_blank" rel="noopener" class="path-card">
+                        <span class="tag">Further support</span>
+                        <h3>WMexperts<span class="dot">.</span>consulting</h3>
+                        <p>When you need more than training: EWM (MFS) Consulting, solution design, workshop moderation and on-site commissioning support across the project lifecycle.</p>
+                        <span class="go">See Consulting &amp; project support &rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== FINAL CTA ===================== -->
+        <section id="contact">
+            <div class="container">
+                <div class="cta-subtle">
+                    <div>
+                        <h3>Bring this training to your team.</h3>
+                        <p>Tell me about your MFS project and your team's level. I'll send you a detailed agenda and the learning outcomes, scoped to where you are and where you want to go.</p>
+                    </div>
+                    <a href="https://wmexperts.consulting/contact.html" class="btn btn-primary">Request the agenda</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="#for-whom">Who it's for</a>
+                <a href="#training">The training</a>
+                <a href="#emulation">Emulation/Visualization</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="https://wmexperts.online" target="_blank" rel="noopener">wmexperts.online</a>
+                <a href="https://wmexperts.consulting" target="_blank" rel="noopener">wmexperts.consulting</a>
+                <a href="https://www.linkedin.com/in/hendrik-schulte-bahrenberg-9a415339/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+            <div class="footer-meta">
+                <span>&copy; 2026 Hendrik Schulte-Bahrenberg &middot; SAP EWM MFS Training</span>
+                <a href="/imprint.html">Imprint</a>
+                <a href="/privacy.html">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================== COOKIE BANNER ===================== -->
+    <div id="cookie-banner" role="dialog" aria-label="Cookie consent">
+        <p>This site uses Google Analytics to understand visitor behaviour. Nothing is loaded until you accept. See our <a href="/privacy.html" style="color: var(--sap-blue);">Privacy Policy</a>.</p>
+        <div class="cookie-actions">
+            <button class="decline" onclick="declineCookies()">Decline</button>
+            <button class="accept" onclick="acceptCookies()">Accept</button>
+        </div>
+    </div>
+
+    <script>
+        /* mobile nav */
+        (function () {
+            const toggle = document.getElementById('menuToggle');
+            const nav = document.getElementById('mainNav');
+            if (!toggle || !nav) return;
+            toggle.addEventListener('click', function () {
+                const open = toggle.classList.toggle('open');
+                nav.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            nav.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', function () {
+                    toggle.classList.remove('open');
+                    nav.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        })();
+
+        /* cookie consent + GA (replace GA_ID with your mfs-training.com property) */
+        const GA_ID = 'G-XXXXXXXXXX';
+        function loadGA() {
+            if (GA_ID === 'G-XXXXXXXXXX' || !GA_ID) return;
+            const s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', GA_ID, { anonymize_ip: true });
+        }
+        function acceptCookies() {
+            localStorage.setItem('mfs-cookie-consent', 'accepted');
+            document.getElementById('cookie-banner').classList.remove('show');
+            loadGA();
+        }
+        function declineCookies() {
+            localStorage.setItem('mfs-cookie-consent', 'declined');
+            document.getElementById('cookie-banner').classList.remove('show');
+        }
+        window.addEventListener('DOMContentLoaded', function () {
+            const consent = localStorage.getItem('mfs-cookie-consent');
+            const banner = document.getElementById('cookie-banner');
+            if (!consent) { banner.classList.add('show'); }
+            else if (consent === 'accepted') { loadGA(); }
+        });
+    </script>
+
+</body>
+</html>
