@@ -188,20 +188,34 @@
         .timing strong { color: var(--sap-blue); }
 
         /* ============================================================
+           VIDEO INTRO
+           ============================================================ */
+        .video-intro {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .video-layout { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 2rem; align-items: center; }
+        .video-copy h2 { font-size: 1.8rem; color: var(--text-dark); line-height: 1.25; letter-spacing: -0.4px; }
+        .video-copy p { margin-top: 1rem; font-size: 1.05rem; }
+        .video-copy .btn { margin-top: 1.6rem; }
+        .video-frame {
+            position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px;
+            background: #0f172a; border: 1px solid rgba(0,85,151,0.18);
+            box-shadow: 0 18px 38px rgba(17,24,39,0.16);
+        }
+        .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+        /* ============================================================
            MODULES (the 3 components)
            ============================================================ */
         .modules { display: grid; gap: 1.5rem; }
         .module {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-            padding: 2rem; display: grid; grid-template-columns: auto 1fr; gap: 1.6rem;
+            padding: 2rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: border-color 0.2s, transform 0.2s;
         }
         .module:hover { border-color: var(--sap-blue); transform: translateY(-3px); }
-        .module .num {
-            font-size: 1.05rem; font-weight: 700; color: var(--sap-blue);
-            width: 46px; height: 46px; border-radius: 10px; background: var(--accent);
-            display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0,85,151,0.15);
-        }
         .module h3 { color: var(--text-dark); font-size: 1.35rem; font-weight: 700; }
         .module .lead { margin: 0.5rem 0 0.4rem; font-size: 1.05rem; }
 
@@ -371,7 +385,7 @@
             .main-nav a { padding: 0.7rem 0; width: 100%; }
             .main-nav .btn { margin: 0.5rem 0 0; }
 
-            .split, .warehouses, .paths { grid-template-columns: 1fr; }
+            .split, .video-layout, .warehouses, .paths { grid-template-columns: 1fr; }
             .module { grid-template-columns: 1fr; gap: 1rem; }
             section { padding: 3.2rem 0; }
             .hero { padding: 3.5rem 0 2.5rem; }
@@ -406,7 +420,7 @@
                 <h1>MFS projects don't stall on the conveyor. <span class="stall">They stall on the team meeting MFS for the first time</span>.</h1>
                 <p class="sub">A hands-on classroom training that prepares your in-house team for SAP EWM MFS - built around a live emulation of automated warehouses.</p>
                 <div class="actions">
-                    <a href="#contact" class="btn btn-primary">Request the agenda</a>
+                    <a href="#contact" class="btn btn-primary">Request a personalized agenda</a>
                     <a href="#training" class="btn btn-secondary">See what's covered</a>
                 </div>
             </div>
@@ -447,22 +461,42 @@
             </div>
         </section>
 
+        <!-- ===================== VIDEO INTRO ===================== -->
+        <section id="video" class="video-intro">
+            <div class="container video-layout">
+                <div class="video-copy">
+                    <span class="eyebrow">For project and IT decision makers</span>
+                    <h2>Why your MFS project needs trained internal people before kickoff.</h2>
+                    <p>This short video is a direct introduction for companies planning automated warehouse projects: where SAP EWM MFS becomes risky, which decisions need an informed in-house team, and how the training closes that gap before the project clock starts running.</p>
+                    <a href="#contact" class="btn btn-secondary">Discuss this with Hendrik</a>
+                </div>
+                <div class="video-frame">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/ot51VUmhtoA"
+                        title="SAP EWM MFS training video for project decision makers"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
         <!-- ===================== THE TRAINING (3 MODULES) ===================== -->
         <section id="training" style="background: var(--bg-light); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
             <div class="container">
                 <div class="section-head">
                     <span class="eyebrow">The training</span>
-                    <h2>Three components that build on each other - from the standard, to its extensions up to running a real project.</h2>
+                    <h2>Components that build on each other - from the standard, to its extensions up to running a real project.</h2>
                     <p>Interactive throughout, with the emulation & visualization running alongside most of the sessions to make the concepts stay concrete and practical.</p>
                 </div>
 
                 <div class="modules">
 
                     <article class="module">
-                        <div class="num">01</div>
                         <div>
                             <h3>MFS Basics</h3>
-                            <p class="lead">How SAP EWM actually controls physical automation — the foundation everything else depends on.</p>
+                            <p class="lead">How SAP EWM actually controls physical automation - the foundation everything else depends on.</p>
                             <ul class="clean">
                                 <li>MFS architecture and how it communicates with the PLC layer</li>
                                 <li>Important objects - Communication points, resources, queues and many more</li>
@@ -470,12 +504,12 @@
                                 <li>Telegrams and the EWM &harr; PLC handshake</li>
                                 <li>Putaway and stock removal strategies</li>
                                 <li>Monitoring material flow in the warehouse management monitor</li>
+                                <li>...and much more</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="module">
-                        <div class="num">02</div>
                         <div>
                             <h3>Enhancing the standard functionality</h3>
                             <p class="lead">Where the MFS standard ends and your project's real requirements begin - how to extend without painting yourself into a corner.</p>
@@ -489,7 +523,6 @@
                     </article>
 
                     <article class="module">
-                        <div class="num">03</div>
                         <div>
                             <h3>Preparation for MFS projects</h3>
                             <p class="lead">The project knowledge that rarely makes it into documentation - and that decides whether you go live on time.</p>
@@ -502,6 +535,20 @@
                         </div>
                     </article>
 
+                    <article class="module">
+                        <div>
+                            <h3>Knowledge Structure &amp; Long-term Capability</h3>
+                            <p class="lead">How to turn the training and project knowledge into something the team can keep using after the classroom and after go-live.</p>
+                            <ul class="clean">
+                                <li>How to build a team knowledge base</li>
+                                <li>What to document, and why</li>
+                                <li>Distributing knowledge across the team</li>
+                                <li>Maintaining &amp; extending after go-live</li>
+                                <li>Reducing key-person dependencies</li>
+                            </ul>
+                        </div>
+                    </article>
+
                 </div>
             </div>
         </section>
@@ -510,7 +557,7 @@
         <section id="emulation" class="emulation">
             <div class="container">
                 <span class="eyebrow">What makes this different</span>
-                <h2>You see the warehouse move - not just the customizing screen.</h2>
+                <h2>You see the warehouse move - not just the code and the customizing tables.</h2>
                 <p class="sub">The training comes with its own MFS emulation and visualization. Two reference warehouses run live in the room: you trigger movements, watch the telegrams flow between EWM and the emulated automation, break things on purpose, and recover them with your own hands.</p>
 
                 <div class="warehouses">
@@ -613,7 +660,7 @@
                         <h3>Bring this training to your team.</h3>
                         <p>Tell me about your MFS project and your team's level. I'll send you a detailed agenda and the learning outcomes, scoped to where you are and where you want to go.</p>
                     </div>
-                    <a href="https://wmexperts.consulting/contact.html" class="btn btn-primary">Request the agenda</a>
+                    <a href="https://wmexperts.consulting/contact.html" class="btn btn-primary">Request a personalized agenda</a>
                 </div>
             </div>
         </section>
@@ -629,8 +676,8 @@
                 <a href="#emulation">Emulation/Visualization</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
-                <a href="https://wmexperts.online" target="_blank" rel="noopener">wmexperts.online</a>
                 <a href="https://wmexperts.consulting" target="_blank" rel="noopener">wmexperts.consulting</a>
+                <a href="https://wmexperts.online" target="_blank" rel="noopener">wmexperts.online</a>
                 <a href="https://www.linkedin.com/in/hendrik-schulte-bahrenberg-9a415339/" target="_blank" rel="noopener">LinkedIn</a>
             </div>
             <div class="footer-meta">
