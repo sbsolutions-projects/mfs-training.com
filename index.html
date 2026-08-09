@@ -3,23 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAP EWM MFS Training | mfs-training.com</title>
-    <meta name="description" content="A hands-on classroom training that prepares in-house teams for SAP EWM MFS (Material Flow System) — built around an emulation of real automated warehouses. By Hendrik Schulte-Bahrenberg.">
+    <title>SAP EWM MFS Training for Project Teams | mfs-training.com</title>
+    <meta name="description" content="On-site SAP EWM MFS training for in-house teams before blueprint, kickoff, or implementation. Learn MFS concepts, PLC integration, project preparation, and live warehouse emulation.">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Hendrik Schulte-Bahrenberg">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mfs-training.com/">
-    <meta property="og:title" content="SAP EWM MFS Training | mfs-training.com">
-    <meta property="og:description" content="Prepare your in-house team for SAP EWM MFS before the project does. Hands-on classroom training with an emulation of real automated warehouses.">
+    <meta property="og:title" content="SAP EWM MFS Training for Project Teams">
+    <meta property="og:description" content="Prepare your in-house SAP EWM team for MFS implementation, PLC integration, and automated warehouse projects before the project clock starts running.">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="SAP EWM MFS Training">
-    <meta name="twitter:description" content="Hands-on SAP EWM MFS training for in-house project teams, built around a live warehouse emulation.">
+    <meta name="twitter:title" content="SAP EWM MFS Training for Project Teams">
+    <meta name="twitter:description" content="On-site SAP EWM MFS workshop for in-house teams preparing for automated warehouse projects, PLC integration, and live MFS emulation.">
 
     <link rel="canonical" href="https://mfs-training.com/">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "SAP EWM MFS Training",
+        "description": "On-site classroom training that prepares in-house SAP EWM teams for MFS implementation, PLC integration, automated warehouse projects, and project preparation before blueprint or kickoff.",
+        "url": "https://mfs-training.com/",
+        "provider": {
+            "@type": "Person",
+            "name": "Hendrik Schulte-Bahrenberg",
+            "url": "https://wmexperts.consulting/"
+        },
+        "educationalLevel": "Professional",
+        "courseMode": "Onsite",
+        "teaches": [
+            "SAP EWM MFS architecture",
+            "PLC telegram communication",
+            "SAP EWM MFS PLC integration",
+            "MFS project preparation",
+            "SAP EWM automated warehouse implementation",
+            "Material flow emulation and testing",
+            "Enhancing SAP EWM MFS standard functionality"
+        ],
+        "audience": {
+            "@type": "Audience",
+            "audienceType": "SAP EWM in-house teams, EWM team leads, IT project leads, warehouse automation teams, SAP EWM consultants, and warehouse managers preparing for automated warehouse projects"
+        },
+        "hasCourseInstance": {
+            "@type": "CourseInstance",
+            "courseMode": "Onsite",
+            "location": {
+                "@type": "Place",
+                "name": "Delivered on-site for company teams worldwide, with focus on Europe and DACH"
+            },
+            "instructor": {
+                "@type": "Person",
+                "name": "Hendrik Schulte-Bahrenberg",
+                "url": "https://wmexperts.consulting/profile.html"
+            }
+        },
+        "inLanguage": "en"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Who is the SAP EWM MFS training for?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The training is built for SAP EWM in-house teams, EWM team leads, IT project leads, warehouse automation teams, SAP EWM consultants, and warehouse managers preparing for an automated warehouse or MFS implementation."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "When should a team take this training?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The best timing is before blueprint, project kickoff, or early solution design, while the team can still influence decisions and reduce dependency on external implementation resources."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is the training delivered remotely or on site?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The training is delivered as an on-site classroom workshop for company and internal project teams."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What makes this MFS workshop different?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The workshop is based on real SAP EWM MFS project experience and uses live emulation and visualization so teams can work with material flow scenarios, telegrams, exception handling, and project preparation in a practical way."
+                }
+            }
+        ]
+    }
+    </script>
 
     <style>
         /* ============================================================
@@ -328,6 +413,13 @@
         .path-card h3 .dot { color: var(--sap-blue); }
         .path-card .go { margin-top: 1.2rem; color: var(--sap-blue); font-weight: 600; font-size: 0.95rem; }
 
+          /* ============================================================
+              FAQ
+              ============================================================ */
+          .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+          .faq-item h3 { color: var(--text-dark); font-size: 1.08rem; margin-bottom: 0.55rem; }
+          .faq-item p { font-size: 0.98rem; }
+
         /* ============================================================
            FINAL CTA
            ============================================================ */
@@ -385,7 +477,7 @@
             .main-nav a { padding: 0.7rem 0; width: 100%; }
             .main-nav .btn { margin: 0.5rem 0 0; }
 
-            .split, .video-layout, .warehouses, .paths { grid-template-columns: 1fr; }
+            .split, .video-layout, .warehouses, .paths, .faq-grid { grid-template-columns: 1fr; }
             .module { grid-template-columns: 1fr; gap: 1rem; }
             section { padding: 3.2rem 0; }
             .hero { padding: 3.5rem 0 2.5rem; }
@@ -418,7 +510,7 @@
             <div class="container">
                 <span class="eyebrow">SAP EWM &middot; Material Flow System Training</span>
                 <h1>MFS projects don't stall on the conveyor. <span class="stall">They stall on the team meeting MFS for the first time</span>.</h1>
-                <p class="sub">A hands-on classroom training that prepares your in-house team for SAP EWM MFS - built around a live emulation of automated warehouses.</p>
+                <p class="sub">An on-site SAP EWM MFS workshop that prepares your in-house team for automated warehouse projects, PLC integration, and MFS implementation before blueprint, kickoff, or solution design.</p>
                 <div class="actions">
                     <a href="#contact" class="btn btn-primary">Request a personalized agenda</a>
                     <a href="#training" class="btn btn-secondary">See what's covered</a>
@@ -438,11 +530,12 @@
                     <div class="panel">
                         <h3>This is for you if&hellip;</h3>
                         <ul class="clean">
+                            <li>You lead an SAP EWM in-house team that needs practical MFS readiness before the implementation starts.</li>
                             <li>Your warehouse connects EWM to physical automation - conveyors, cranes, sorters, shuttles via PLC.</li>
                             <li>You run an in-house SAP EWM team facing your first - or next - MFS project.</li>
                             <li>You're a project or IT lead who needs the team ready before kickoff, not learning on the project's clock.</li>
                             <li>You want to reduce dependency on expensive external resources for the parts your own people can own.</li>
-                            <li>You're a developer or consultant looking to build solid, practical knowledge of EWM MFS.</li>
+                            <li>You're a developer, consultant, or small SAP EWM consulting team looking to build solid, practical knowledge of EWM MFS.</li>
                         </ul>
                     </div>
                     <div class="panel muted">
@@ -450,7 +543,7 @@
                         <ul class="clean">
                             <li>You're after a general EWM introduction. This is MFS-specific, end to end.</li>
                             <li>There's no automation in scope of your project. Without an MFS layer, most of this won't apply.</li>
-                            <li>You want a certificate rather than project readiness. The goal here is a team that performs in the project - not a badge to hand on the wall.</li>
+                            <li>You need a remote or public open-enrollment course. This workshop is designed for company teams working together on their own project readiness.</li>
                         </ul>
                     </div>
                 </div>
@@ -467,7 +560,7 @@
                 <div class="video-copy">
                     <span class="eyebrow">For project and IT decision makers</span>
                     <h2>Why your MFS project needs trained internal people before kickoff.</h2>
-                    <p>This short video is a direct introduction for companies planning automated warehouse projects: where SAP EWM MFS becomes risky, which decisions need an informed in-house team, and how the training closes that gap before the project clock starts running.</p>
+                    <p>This short video is a direct introduction for companies planning automated warehouse projects: where SAP EWM MFS becomes risky, which decisions need an informed in-house team, and how the training closes that gap before blueprint, kickoff, or implementation pressure starts.</p>
                     <a href="#contact" class="btn btn-secondary">Discuss this with Hendrik</a>
                 </div>
                 <div class="video-frame">
@@ -525,7 +618,7 @@
                     <article class="module">
                         <div>
                             <h3>Preparation for MFS projects</h3>
-                            <p class="lead">The project knowledge that rarely makes it into documentation - and that decides whether you go live on time.</p>
+                            <p class="lead">The project knowledge that rarely makes it into documentation - and that decides whether an SAP EWM MFS implementation starts with clarity or confusion.</p>
                             <ul class="clean">
                                 <li>Typical MFS project phases, roles, and who owns what</li>
                                 <li>Reading and writing telegram specifications with the equipment suppliers</li>
@@ -618,12 +711,40 @@
             <div class="container">
                 <div class="section-head">
                     <span class="eyebrow">Who's behind it</span>
-                    <h2>Built from real MFS projects - not from academy content.</h2>
+                    <h2>Built from real MFS projects - not generic classroom content.</h2>
                 </div>
                 <div class="panel">
                     <p>The training is designed and delivered by <strong>Hendrik</strong>, a freelance SAP EWM &amp; MFS consultant with 16+ years of delivery experience on WMS implementation projects - most of them facing EWM and its MFS.</p>
                     <p>Every component reflects what actually causes MFS rollouts to become expensive or run late - the supplier handshake, solution design, exception handling, go-live realities. Nothing here is theory that hasn't been experienced in the real world.</p>
                     <p style="margin-top:1.3rem;"><a href="https://wmexperts.consulting/profile.html" target="_blank" rel="noopener" style="font-weight:600;">See the full Consultant Profile &rarr;</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== FAQ ===================== -->
+        <section id="faq">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Questions before you plan</span>
+                    <h2>Common questions from teams preparing for SAP EWM MFS.</h2>
+                </div>
+                <div class="faq-grid">
+                    <article class="panel faq-item">
+                        <h3>Who is this SAP EWM MFS training for?</h3>
+                        <p>It is built for SAP EWM in-house teams, EWM team leads, IT project leads, warehouse automation teams, SAP EWM consultants, and warehouse managers preparing for an automated warehouse or MFS implementation.</p>
+                    </article>
+                    <article class="panel faq-item">
+                        <h3>When should we bring the training in?</h3>
+                        <p>The strongest timing is before blueprint, project kickoff, or early solution design, while your internal team can still influence decisions and avoid learning MFS only under project pressure.</p>
+                    </article>
+                    <article class="panel faq-item">
+                        <h3>Is the workshop remote or on site?</h3>
+                        <p>The training is delivered as an on-site classroom workshop for company and internal project teams, with the live MFS emulation used throughout the practical parts.</p>
+                    </article>
+                    <article class="panel faq-item">
+                        <h3>What makes it different from a generic EWM course?</h3>
+                        <p>The workshop focuses on SAP EWM MFS project readiness: PLC integration, telegrams, exception handling, emulation-based testing, supplier communication, and the decisions that make automated warehouse projects succeed.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -658,9 +779,9 @@
                 <div class="cta-subtle">
                     <div>
                         <h3>Bring this training to your team.</h3>
-                        <p>Tell me about your MFS project and your team's level. I'll send you a detailed agenda and the learning outcomes, scoped to where you are and where you want to go.</p>
+                        <p>Tell me about your MFS project and your team's level. I'll send you a detailed agenda or set up a Q&amp;A call, scoped to where you are and where you want to go.</p>
                     </div>
-                    <a href="https://wmexperts.consulting/contact.html" class="btn btn-primary">Request a personalized agenda</a>
+                    <a href="https://wmexperts.consulting/contact.html" class="btn btn-primary">Request an agenda or Q&amp;A call</a>
                 </div>
             </div>
         </section>
