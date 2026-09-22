@@ -20,6 +20,10 @@
     <meta name="twitter:description" content="Prepare your in-house SAP EWM team before kickoff and reduce project risk, ramp-up time, and external dependency.">
 
     <link rel="canonical" href="https://mfs-training.com/">
+    <link rel="alternate" hreflang="en" href="https://mfs-training.com/">
+    <link rel="alternate" hreflang="de" href="https://mfs-training.com/index-de.html">
+    <link rel="alternate" hreflang="x-default" href="https://mfs-training.com/">
+    <script src="./assets/js/site.js" defer></script>
 
     <script type="application/ld+json">
     {
@@ -196,6 +200,9 @@
             font-size: 0.95rem; font-weight: 500; transition: color 0.2s;
         }
         .main-nav a:hover, .main-nav a.active { color: var(--sap-blue); }
+        .language-switch { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--text-muted); font-weight: 600; }
+        .language-switch a { width: auto; padding: 0; }
+        .language-switch .divider { color: var(--border); }
         .main-nav .btn { margin-left: 0.5rem; }
 
         .menu-toggle {
@@ -332,6 +339,7 @@
             background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16);
             border-radius: 14px; padding: 1.6rem; backdrop-filter: blur(2px);
         }
+        .wh:only-child { grid-column: 1 / -1; }
         .wh h3 { color: #fff; font-size: 1.2rem; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem; }
         .wh p { color: rgba(255,255,255,0.8); font-size: 0.97rem; margin-bottom: 1.2rem; }
         .wh ul.clean li { color: rgba(255,255,255,0.9); }
@@ -486,6 +494,8 @@
             }
             .main-nav.open { display: flex; }
             .main-nav a { padding: 0.7rem 0; width: 100%; }
+            .language-switch { padding: 0.7rem 0; }
+            .language-switch a { width: auto; padding: 0; }
             .main-nav .btn { margin: 0.5rem 0 0; }
 
             .split, .video-layout, .warehouses, .paths, .faq-grid { grid-template-columns: 1fr; }
@@ -511,6 +521,11 @@
                 <a href="#emulation">Emulation/Visualization</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
+                <span class="language-switch" aria-label="Language selection">
+                    <a href="./index.html" class="active" hreflang="en" lang="en" data-lang-choice="en">EN</a>
+                    <span class="divider">/</span>
+                    <a href="./index-de.html" hreflang="de" lang="de" data-lang-choice="de">DE</a>
+                </span>
             </nav>
         </div>
     </header>
@@ -676,34 +691,21 @@
         <section id="emulation" class="emulation">
             <div class="container">
                 <span class="eyebrow">What makes this different</span>
-                <h2>You see the warehouse move - not just the code and the customizing tables.</h2>
-                <p class="sub">The training comes with its own MFS emulation and visualization. Two reference warehouses run live in the room: you trigger movements, watch the telegrams flow between EWM and the emulated automation, break things on purpose, and recover them with your own hands.</p>
+                <h2>You see the material flow live - not just the code and the customizing tables.</h2>
+                <p class="sub">The training comes with its own MFS emulation and visualization. The reference warehouse runs live in the room: you trigger movements, watch the telegrams flow between EWM and the emulated automation, break things on purpose, and recover them with your own hands.</p>
 
                 <div class="warehouses">
                     <div class="wh">
-                        <h3>Pallet handling</h3>
-                        <p>A high-bay warehouse with conveyor loops, identification points, and crane control.</p>
+                        <h3>Reference warehouse</h3>
+                        <p>An automated material flow with conveyor technology, identification points, and storage areas.</p>
                         <div class="track pallet" aria-hidden="true">
                             <span class="unit"></span><span class="unit"></span><span class="unit"></span><span class="unit"></span>
                         </div>
                         <ul class="clean">
-                            <li>Pallet conveyor and crane movements end to end</li>
+                            <li>End-to-end transport movements</li>
                             <li>Identification points and routing decisions</li>
-                            <li>Exception & reject scenarios</li>
-                            <li>Putaway and removal against the high-bay</li>
-                        </ul>
-                    </div>
-                    <div class="wh">
-                        <h3>Case / tote handling</h3>
-                        <p>A conveyor, sorter logic, work centers and a Miniload.</p>
-                        <div class="track tote" aria-hidden="true">
-                            <span class="unit"></span><span class="unit"></span><span class="unit"></span><span class="unit"></span>
-                        </div>
-                        <ul class="clean">
-                            <li>Tote conveyor and sortation flows</li>
-                            <li>Work center integration and routing</li>
-                            <li>Exception handling on the line</li>
-                            <li>Putaway and removal against the Miniload</li>
+                            <li>Telegrams, acknowledgements, and status changes</li>
+                            <li>Exception and error scenarios</li>
                         </ul>
                     </div>
                 </div>

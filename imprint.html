@@ -9,6 +9,10 @@
     <meta name="author" content="Hendrik Schulte-Bahrenberg">
 
     <link rel="canonical" href="https://mfs-training.com/imprint.html">
+    <link rel="alternate" hreflang="en" href="https://mfs-training.com/imprint.html">
+    <link rel="alternate" hreflang="de" href="https://mfs-training.com/imprint-de.html">
+    <link rel="alternate" hreflang="x-default" href="https://mfs-training.com/imprint.html">
+    <script src="./assets/js/site.js" defer></script>
 
     <style>
         /* ============================================================
@@ -102,6 +106,9 @@
             font-size: 0.95rem; font-weight: 500; transition: color 0.2s;
         }
         .main-nav a:hover, .main-nav a.active { color: var(--sap-blue); }
+        .language-switch { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--text-muted); font-weight: 600; }
+        .language-switch a { width: auto; padding: 0; }
+        .language-switch .divider { color: var(--border); }
 
         .menu-toggle {
             display: none; flex-direction: column; gap: 5px;
@@ -160,6 +167,8 @@
             }
             .main-nav.open { display: flex; }
             .main-nav a { padding: 0.7rem 0; width: 100%; }
+            .language-switch { padding: 0.7rem 0; }
+            .language-switch a { width: auto; padding: 0; }
 
             section { padding: 3.2rem 0; }
         }
@@ -180,6 +189,11 @@
                 <a href="/index.html#emulation">Emulation/Visualization</a>
                 <a href="/index.html#about">About</a>
                 <a href="/index.html#contact">Contact</a>
+                <span class="language-switch" aria-label="Language selection">
+                    <a href="/imprint.html" class="active" hreflang="en" lang="en" data-lang-choice="en">EN</a>
+                    <span class="divider">/</span>
+                    <a href="/imprint-de.html" hreflang="de" lang="de" data-lang-choice="de">DE</a>
+                </span>
             </nav>
         </div>
     </header>
